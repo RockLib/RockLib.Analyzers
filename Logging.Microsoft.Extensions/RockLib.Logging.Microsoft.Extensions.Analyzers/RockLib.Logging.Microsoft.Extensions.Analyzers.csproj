@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Description>Roslyn analyzers for RockLib.Logging.Microsoft.Extensions</Description>
 		<Description>Roslyn analyzers for RockLib.Logging.Microsoft.Extensions</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
