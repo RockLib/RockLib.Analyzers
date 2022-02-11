@@ -26,7 +26,6 @@
 	<Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 	<Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="Exists('$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets')" />
 	<ItemGroup>
-		<ProjectReference Include="..\RockLib.Logging.Microsoft.Extensions.Analyzers.CodeFixes\RockLib.Logging.Microsoft.Extensions.Analyzers.CodeFixes.csproj" />
 		<ProjectReference Include="..\RockLib.Logging.Microsoft.Extensions.Analyzers\RockLib.Logging.Microsoft.Extensions.Analyzers.csproj" />
 	</ItemGroup>
 	<ItemGroup>

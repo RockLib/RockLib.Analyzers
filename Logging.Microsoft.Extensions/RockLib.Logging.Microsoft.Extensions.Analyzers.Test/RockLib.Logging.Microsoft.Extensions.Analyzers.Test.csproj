@@ -16,7 +16,6 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.1" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\RockLib.Logging.Microsoft.Extensions.Analyzers.CodeFixes\RockLib.Logging.Microsoft.Extensions.Analyzers.CodeFixes.csproj" />
 		<ProjectReference Include="..\RockLib.Logging.Microsoft.Extensions.Analyzers\RockLib.Logging.Microsoft.Extensions.Analyzers.csproj" />
 	</ItemGroup>
 </Project>
