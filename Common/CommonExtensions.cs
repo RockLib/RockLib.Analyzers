@@ -7,7 +7,10 @@ namespace RockLib.Analyzers.Common
         public static IOperation GetRootOperation(this IOperation operation)
         {
             while (operation.Parent != null)
+            {
                 operation = operation.Parent;
+            }
+
             return operation;
         }
     }
