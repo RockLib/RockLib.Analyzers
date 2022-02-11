@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
-using RockLibVerifier = Microsoft.CodeAnalysis.CSharp.Testing.XUnit.CodeFixVerifier<
-    RockLib.Logging.Microsoft.Extensions.Analyzers.LoggerShouldBeSynchronousAnalyzer,
-    RockLib.Logging.Microsoft.Extensions.Analyzers.LoggerShouldBeSynchronousCodeFixProvider>;
 
 namespace RockLib.Logging.Microsoft.Extensions.Analyzers.Test
 {
@@ -11,7 +8,7 @@ namespace RockLib.Logging.Microsoft.Extensions.Analyzers.Test
         [Fact]
         public async Task VerifyWhenProcessingModeIsNotSpecified()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<LoggerShouldBeSynchronousAnalyzer, LoggerShouldBeSynchronousCodeFixProvider>(@"
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;
@@ -45,7 +42,7 @@ public class Startup
         [Fact]
         public async Task VerifyWhenProcessingModeIsNotSynchronous()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<LoggerShouldBeSynchronousAnalyzer, LoggerShouldBeSynchronousCodeFixProvider>(@"
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;

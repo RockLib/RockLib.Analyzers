@@ -5,17 +5,40 @@ using System.Threading;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
+using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace RockLib.Logging.Microsoft.Extensions.Analyzers.Test
 {
     internal static class TestAssistants
     {
-        public static async Task VerifyAnalyzerAsync<T>(string source)
-            where T : DiagnosticAnalyzer, new()
+        // NOTE: The code provided to source may contain the "[|" and "|]"
+        // character combinations. This indicates that the code within these
+        // combinations is in error, and the analyzer should identify this span
+        // with a diagnostic.
+        // For more information, visit https://github.com/dotnet/roslyn-sdk/blob/main/src/Microsoft.CodeAnalysis.Testing/README.md
+        public static async Task VerifyAnalyzerAsync<TAnalyzer>(string source)
+            where TAnalyzer : DiagnosticAnalyzer, new()
         {
-            var test = new CSharpCodeFixTest<T, EmptyCodeFixProvider, XUnitVerifier>
+            var test = new CSharpCodeFixTest<TAnalyzer, EmptyCodeFixProvider, XUnitVerifier>
             {
                 TestCode = source,
+                ReferenceAssemblies = ReferenceAssemblies.Default
+                    .AddPackages(ImmutableArray.Create(
+                        new PackageIdentity("RockLib.Logging.Microsoft.Extensions", "1.0.2"),
+                        new PackageIdentity("Microsoft.Extensions.Hosting", "5.0.0")))
+            };
+
+            await test.RunAsync(CancellationToken.None).ConfigureAwait(false);
+        }
+
+        public static async Task VerifyCodeFixAsync<TAnalyzer, TCodeFix>(string source, string fixedSource)
+            where TAnalyzer : DiagnosticAnalyzer, new()
+            where TCodeFix : CodeFixProvider, new()
+        {
+            var test = new CSharpCodeFixTest<TAnalyzer, TCodeFix, XUnitVerifier>
+            {
+                TestCode = source,
+                FixedCode = fixedSource,
                 ReferenceAssemblies = ReferenceAssemblies.Default
                     .AddPackages(ImmutableArray.Create(
                         new PackageIdentity("RockLib.Logging.Microsoft.Extensions", "1.0.2"),

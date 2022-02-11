@@ -36,7 +36,6 @@ namespace Microsoft.AspNetCore.Hosting
 }";
 
         // TODO: Need a test where AddRockLibLoggerProvider() is not called, 
-        // and where the arguments don't match, 
         // and when the processing mode isn't synchronous
 
         [Fact]

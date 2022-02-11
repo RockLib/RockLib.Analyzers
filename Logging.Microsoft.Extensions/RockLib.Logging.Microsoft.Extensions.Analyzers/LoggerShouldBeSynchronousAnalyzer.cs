@@ -47,13 +47,13 @@ namespace RockLib.Logging.Microsoft.Extensions.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var addLoggerExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.DependencyInjection.ServiceCollectionExtensions");
-            if (addLoggerExtensionsType == null)
+            if (addLoggerExtensionsType is null)
             {
                 return;
             }
 
             var addRockLibLoggerProviderExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.RockLibLoggerProviderExtensions");
-            if (addRockLibLoggerProviderExtensionsType == null)
+            if (addRockLibLoggerProviderExtensionsType is null)
             {
                 return;
             }

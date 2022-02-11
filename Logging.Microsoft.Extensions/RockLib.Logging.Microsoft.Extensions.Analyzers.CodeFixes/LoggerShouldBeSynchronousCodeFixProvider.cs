@@ -48,7 +48,7 @@ namespace RockLib.Logging.Microsoft.Extensions.Analyzers
                 {
                     var processingModeArgumentOperation = invocationOperation.Arguments.FirstOrDefault(a => a.Parameter!.Name == "processingMode");
 
-                    if (processingModeArgumentOperation == null)
+                    if (processingModeArgumentOperation is null)
                     {
                         continue;
                     }
