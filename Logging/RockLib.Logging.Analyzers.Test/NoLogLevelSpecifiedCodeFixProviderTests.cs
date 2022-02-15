@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
-using RockLibVerifier = RockLib.Logging.Analyzers.Test.CSharpCodeFixVerifier<
-    RockLib.Logging.Analyzers.NoLogLevelSpecifiedAnalyzer,
-    RockLib.Logging.Analyzers.NoLogLevelSpecifiedCodeFixProvider>;
 
 namespace RockLib.Logging.Analyzers.Test
 {
@@ -11,7 +8,7 @@ namespace RockLib.Logging.Analyzers.Test
         [Fact(DisplayName = null)]
         public async Task CodeFixApplied1()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<NoLogLevelSpecifiedAnalyzer, NoLogLevelSpecifiedCodeFixProvider>(@"
 using RockLib.Logging;
 using System;
 
@@ -54,7 +51,7 @@ public class Test
         LogEntry logEntry2 = new(""Hello, world!"", level: LogLevel.Debug);
         logger.Log(logEntry2);
     }
-}");
+}").ConfigureAwait(false);
         }
     }
 }

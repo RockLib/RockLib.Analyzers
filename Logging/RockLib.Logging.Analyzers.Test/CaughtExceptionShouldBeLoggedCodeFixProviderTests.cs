@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
-using RockLibVerifier = RockLib.Logging.Analyzers.Test.CSharpCodeFixVerifier<
-    RockLib.Logging.Analyzers.CaughtExceptionShouldBeLoggedAnalyzer,
-    RockLib.Logging.Analyzers.CaughtExceptionShouldBeLoggedCodeFixProvider>;
 
 namespace RockLib.Logging.Analyzers.Test
 {
@@ -11,7 +8,7 @@ namespace RockLib.Logging.Analyzers.Test
         [Fact(DisplayName = "Code fix adds catch exception variable to logs")]
         public async Task CodeFixApplied1()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<CaughtExceptionShouldBeLoggedAnalyzer, CaughtExceptionShouldBeLoggedCodeFixProvider>(@"
 using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
@@ -84,13 +81,13 @@ public class Test
             logger.Log(logEntry3);
         }
     }
-}");
+}").ConfigureAwait(false);
         }
 
         [Fact(DisplayName = "Code fix adds missing variable for catch declaration")]
         public async Task CodeFixApplied2()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<CaughtExceptionShouldBeLoggedAnalyzer, CaughtExceptionShouldBeLoggedCodeFixProvider>(@"
 using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
@@ -163,13 +160,13 @@ public class Test
             logger.Log(logEntry3);
         }
     }
-}");
+}").ConfigureAwait(false);
         }
 
         [Fact(DisplayName = "Code fix adds missing catch declaration")]
         public async Task CodeFixApplied3()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<CaughtExceptionShouldBeLoggedAnalyzer, CaughtExceptionShouldBeLoggedCodeFixProvider>(@"
 using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 
@@ -241,13 +238,13 @@ public class Test
             logger.Log(logEntry3);
         }
     }
-}");
+}").ConfigureAwait(false);
         }
 
         [Fact(DisplayName = "Code fix replaces null exception parameters with catch variable")]
         public async Task CodeFixApplied4()
         {
-            await RockLibVerifier.VerifyCodeFixAsync(@"
+            await TestAssistants.VerifyCodeFixAsync<CaughtExceptionShouldBeLoggedAnalyzer, CaughtExceptionShouldBeLoggedCodeFixProvider>(@"
 using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
@@ -321,7 +318,7 @@ public class Test
             logger.Log(logEntry3);
         }
     }
-}");
+}").ConfigureAwait(false);
         }
     }
 }

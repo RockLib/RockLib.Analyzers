@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using Xunit;
-using RockLibVerifier = RockLib.Logging.Analyzers.Test.CSharpAnalyzerVerifier<
-    RockLib.Logging.Analyzers.UseSanitizingLoggingMethodAnalyzer>;
 
 namespace RockLib.Logging.Analyzers.Test
 {
@@ -10,10 +9,10 @@ namespace RockLib.Logging.Analyzers.Test
         [Fact(DisplayName = "Diagnostics are reported when setting extended property with a non-value type")]
         public async Task DiagnosticsReported()
         {
-            await RockLibVerifier.VerifyAnalyzerAsync(
+            await TestAssistants.VerifyAnalyzerAsync<UseSanitizingLoggingMethodAnalyzer>(
                 GetTestCode(
                     extendedPropertyType: "TestClass",
-                    shouldReportDiagnostic: true));
+                    shouldReportDiagnostic: true)).ConfigureAwait(false);
         }
 
         [Theory(DisplayName = "No diagnostics are reported for extended properties of specified type")]
@@ -43,19 +42,19 @@ namespace RockLib.Logging.Analyzers.Test
         [InlineData("TypeCode")]
         public async Task NoDiagnosticsReported(string extendedPropertyType)
         {
-            await RockLibVerifier.VerifyAnalyzerAsync(
+            await TestAssistants.VerifyAnalyzerAsync<UseSanitizingLoggingMethodAnalyzer>(
                 GetTestCode(
                     extendedPropertyType: extendedPropertyType,
-                    shouldReportDiagnostic: false));
+                    shouldReportDiagnostic: false)).ConfigureAwait(false);
         }
 
 
         private static string GetTestCode(string extendedPropertyType, bool shouldReportDiagnostic)
         {
-            string openDiagnostic = shouldReportDiagnostic ? "[|" : null;
-            string closeDiagnostic = shouldReportDiagnostic ? "|]" : null;
+            var openDiagnostic = shouldReportDiagnostic ? "[|" : null;
+            var closeDiagnostic = shouldReportDiagnostic ? "|]" : null;
 
-            return string.Format(@"
+            return string.Format(CultureInfo.InvariantCulture, @"
 using RockLib.Logging;
 using System;
 using System.Collections.Generic;
