@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 
 namespace RockLib.Logging.Analyzers
@@ -25,12 +26,13 @@ namespace RockLib.Logging.Analyzers
              DiagnosticSeverity.Warning,
              isEnabledByDefault: true,
              description: _description,
-             helpLinkUri: string.Format(HelpLinkUri.Format, DiagnosticIds.UnexpectedExtendedPropertiesObject));
+             helpLinkUri: string.Format(CultureInfo.InvariantCulture, HelpLinkUri.Format, DiagnosticIds.UnexpectedExtendedPropertiesObject));
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public override void Initialize(AnalysisContext context)
         {
+            if (context is null) { throw new ArgumentNullException(nameof(context)); }
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
             context.RegisterCompilationStartAction(OnCompilationStart);
@@ -39,20 +41,16 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var loggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LoggingExtensions");
-            if (loggingExtensionsType == null)
-                return;
+            if (loggingExtensionsType == null) { return; }
 
             var safeLoggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.SafeLoggingExtensions");
-            if (safeLoggingExtensionsType == null)
-                return;
+            if (safeLoggingExtensionsType == null) { return; }
 
             var loggerType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.ILogger");
-            if (loggerType == null)
-                return;
+            if (loggerType == null) { return; }
 
             var logEntryType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LogEntry");
-            if (logEntryType == null)
-                return;
+            if (logEntryType == null) { return; }
 
             var analyzer = new OperationAnalyzer(loggerType, logEntryType, loggingExtensionsType, safeLoggingExtensionsType);
 
@@ -103,19 +101,19 @@ namespace RockLib.Logging.Analyzers
                 }
             }
 
-            private void AnalyzeExtendedPropertiesArgument(IEnumerable<IArgumentOperation> arguments,
+            private static void AnalyzeExtendedPropertiesArgument(IEnumerable<IArgumentOperation> arguments,
                  Action<Diagnostic> reportDiagnostic, SyntaxNode reportingNode)
             {
-                var extendedPropertiesArgument = arguments.FirstOrDefault(argument => argument.Parameter.Name == "extendedProperties");
+                var extendedPropertiesArgument = arguments.FirstOrDefault(argument => argument.Parameter!.Name == "extendedProperties");
 
                 if (extendedPropertiesArgument == null
-                          || !(extendedPropertiesArgument.Value is IConversionOperation convertToObjectType)
-                          || convertToObjectType.Type.SpecialType != SpecialType.System_Object)
+                    || !(extendedPropertiesArgument.Value is IConversionOperation convertToObjectType)
+                    || convertToObjectType.Type!.SpecialType != SpecialType.System_Object)
                     return;
 
                 var extendedPropertiesArgumentValue = convertToObjectType.Operand;
 
-                if (!extendedPropertiesArgumentValue.Type.IsAnonymousType
+                if (!extendedPropertiesArgumentValue.Type!.IsAnonymousType
                     && !IsValidDictionary(extendedPropertiesArgumentValue.Type))
                 {
                     var diagnostic = Diagnostic.Create(Rule, reportingNode.GetLocation());
@@ -123,7 +121,7 @@ namespace RockLib.Logging.Analyzers
                 }
             }
 
-            private bool IsValidDictionary(ITypeSymbol type)
+            private static bool IsValidDictionary(ITypeSymbol type)
             {
                 // TODO: Reduce false positives (we should only match if it implements IEnumerable<KeyValuePair<string, T>> or IDictionary)
                 return type

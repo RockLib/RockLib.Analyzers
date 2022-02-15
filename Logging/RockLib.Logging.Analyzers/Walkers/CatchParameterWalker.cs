@@ -22,9 +22,11 @@ namespace RockLib.Logging.Analyzers
         public override void VisitCatchClause(ICatchClauseOperation catchClause)
         {
             if (catchClause.ExceptionDeclarationOrExpression is null)
+            {
                 IsExceptionCaught = true;
+            }
 
-            var argument = _invocationOperation.Arguments.FirstOrDefault(a => a.Parameter.Name == "exception");
+            var argument = _invocationOperation.Arguments.FirstOrDefault(a => a.Parameter!.Name == "exception");
             if (argument == null || argument.IsImplicit)
             {
                 IsExceptionCaught = false;
@@ -32,7 +34,7 @@ namespace RockLib.Logging.Analyzers
             else if (argument.Value is ILocalReferenceOperation localReference
             && catchClause.ExceptionDeclarationOrExpression is IVariableDeclaratorOperation variableDeclarator)
             {
-                var isException = localReference.Type.IsException(_exceptionType, _compilation);
+                var isException = localReference.Type!.IsException(_exceptionType, _compilation);
                 IsExceptionCaught = isException && SymbolEqualityComparer.Default.Equals(localReference.Local, variableDeclarator.Symbol);
             }
             else if (argument.Value is IConversionOperation conversion
@@ -40,9 +42,9 @@ namespace RockLib.Logging.Analyzers
                 && !conversion.ConstantValue.HasValue
                 && catchClause.ExceptionDeclarationOrExpression is IVariableDeclaratorOperation catchVariableDeclarator)
             {
-                var isEx = _compilation.ClassifyCommonConversion(convertedLocalReference.Type, _exceptionType).IsImplicit;
+                var isEx = _compilation.ClassifyCommonConversion(convertedLocalReference.Type!, _exceptionType).IsImplicit;
                 var doesCaughtExceptionMatchArgument = SymbolEqualityComparer.Default.Equals(convertedLocalReference.Local, catchVariableDeclarator.Symbol);
-                IsExceptionCaught = convertedLocalReference.Type.IsException(_exceptionType, _compilation) && doesCaughtExceptionMatchArgument;
+                IsExceptionCaught = convertedLocalReference.Type!.IsException(_exceptionType, _compilation) && doesCaughtExceptionMatchArgument;
             }
 
             base.VisitCatchClause(catchClause);

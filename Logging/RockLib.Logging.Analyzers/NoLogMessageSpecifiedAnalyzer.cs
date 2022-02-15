@@ -1,9 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 using RockLib.Analyzers.Common;
+using System;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 
 namespace RockLib.Logging.Analyzers
@@ -23,12 +24,13 @@ namespace RockLib.Logging.Analyzers
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: _description,
-            helpLinkUri: string.Format(HelpLinkUri.Format, DiagnosticIds.NoMessageSpecified));
+            helpLinkUri: string.Format(CultureInfo.InvariantCulture, HelpLinkUri.Format, DiagnosticIds.NoMessageSpecified));
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public override void Initialize(AnalysisContext context)
         {
+            if (context is null) { throw new ArgumentNullException(nameof(context)); }
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
             context.RegisterCompilationStartAction(OnCompilationStart);
@@ -37,20 +39,16 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var iloggerType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.ILogger");
-            if (iloggerType == null)
-                return;
+            if (iloggerType == null) { return; }
 
             var loggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LoggingExtensions");
-            if (loggingExtensionsType == null)
-                return;
+            if (loggingExtensionsType == null) { return; }
 
             var safeLoggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.SafeLoggingExtensions");
-            if (safeLoggingExtensionsType == null)
-                return;
+            if (safeLoggingExtensionsType == null) { return; }
 
             var stringType = context.Compilation.GetTypeByMetadataName("System.String");
-            if (stringType == null)
-                return;
+            if (stringType == null) { return; }
 
             var analyzer = new OperationAnalyzer(iloggerType, loggingExtensionsType, safeLoggingExtensionsType, stringType);
             context.RegisterOperationAction(analyzer.AnalyzeInvocation, OperationKind.Invocation);
@@ -75,7 +73,7 @@ namespace RockLib.Logging.Analyzers
             {
                 var invocationOperation = (IInvocationOperation)context.Operation;
                 var methodSymbol = invocationOperation.TargetMethod;
-                Location syntaxLocation = null;
+                Location? syntaxLocation = null;
                 if (methodSymbol.MethodKind == MethodKind.Ordinary
                     && methodSymbol.Name == "Log"
                     && SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _iloggerType))
@@ -95,7 +93,7 @@ namespace RockLib.Logging.Analyzers
                     || SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _safeLoggingExtensionType))
                 {
                     var arguments = invocationOperation.Arguments;
-                    var messageArg = arguments.FirstOrDefault(argument => argument.Parameter.Name == "message");
+                    var messageArg = arguments.First(argument => argument.Parameter!.Name == "message");
 
                     if (messageArg.Value.ConstantValue.HasValue
                         && (messageArg.Value.ConstantValue.Value == null
@@ -121,7 +119,7 @@ namespace RockLib.Logging.Analyzers
             {
                 if (logEntryCreation.Arguments.Length > 0)
                 {
-                    var levelArgument = logEntryCreation.Arguments.First(a => a.Parameter.Name == "message");
+                    var levelArgument = logEntryCreation.Arguments.First(a => a.Parameter!.Name == "message");
                     if (!levelArgument.IsImplicit
                         && levelArgument.Value.ConstantValue.HasValue
                         && levelArgument.Value.ConstantValue.Value != null

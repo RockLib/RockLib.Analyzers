@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RockLib.Logging.Analyzers.CodeFixes\RockLib.Logging.Analyzers.CodeFixes.csproj" />
     <ProjectReference Include="..\RockLib.Logging.Analyzers\RockLib.Logging.Analyzers.csproj" />
   </ItemGroup>
 

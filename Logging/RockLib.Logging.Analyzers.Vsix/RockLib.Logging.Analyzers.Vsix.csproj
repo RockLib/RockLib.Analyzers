@@ -33,7 +33,6 @@
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="Exists('$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets')" />
 
   <ItemGroup>
-    <ProjectReference Include="..\RockLib.Logging.Analyzers.CodeFixes\RockLib.Logging.Analyzers.CodeFixes.csproj" />
     <ProjectReference Include="..\RockLib.Logging.Analyzers\RockLib.Logging.Analyzers.csproj" />
   </ItemGroup>
 

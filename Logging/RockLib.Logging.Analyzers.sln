@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers", "RockLib.Logging.Analyzers\RockLib.Logging.Analyzers.csproj", "{E2B55068-A3EA-42DD-94D9-C5F92E477826}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.CodeFixes", "RockLib.Logging.Analyzers.CodeFixes\RockLib.Logging.Analyzers.CodeFixes.csproj", "{071007EC-CDEB-432E-8BCC-2F87C468C10B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.Package", "RockLib.Logging.Analyzers.Package\RockLib.Logging.Analyzers.Package.csproj", "{D36E0A2D-1326-4C6C-96E0-CE0870E81ECE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.Test", "RockLib.Logging.Analyzers.Test\RockLib.Logging.Analyzers.Test.csproj", "{A76A7E7E-D82A-4DE0-88CD-6D5BD58A0EEB}"
 EndProject
@@ -31,7 +27,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RockLib.Analyzers.Common", 
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\Common\RockLib.Analyzers.Common.projitems*{071007ec-cdeb-432e-8bcc-2f87c468c10b}*SharedItemsImports = 5
 		..\Common\RockLib.Analyzers.Common.projitems*{886a10e9-6c82-4e91-9da0-14dc9531234f}*SharedItemsImports = 13
 		..\Common\RockLib.Analyzers.Common.projitems*{e2b55068-a3ea-42dd-94d9-c5f92e477826}*SharedItemsImports = 5
 	EndGlobalSection
@@ -44,14 +39,6 @@ Global
 		{E2B55068-A3EA-42DD-94D9-C5F92E477826}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2B55068-A3EA-42DD-94D9-C5F92E477826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2B55068-A3EA-42DD-94D9-C5F92E477826}.Release|Any CPU.Build.0 = Release|Any CPU
-		{071007EC-CDEB-432E-8BCC-2F87C468C10B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{071007EC-CDEB-432E-8BCC-2F87C468C10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{071007EC-CDEB-432E-8BCC-2F87C468C10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{071007EC-CDEB-432E-8BCC-2F87C468C10B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D36E0A2D-1326-4C6C-96E0-CE0870E81ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D36E0A2D-1326-4C6C-96E0-CE0870E81ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D36E0A2D-1326-4C6C-96E0-CE0870E81ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D36E0A2D-1326-4C6C-96E0-CE0870E81ECE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A76A7E7E-D82A-4DE0-88CD-6D5BD58A0EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A76A7E7E-D82A-4DE0-88CD-6D5BD58A0EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A76A7E7E-D82A-4DE0-88CD-6D5BD58A0EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU

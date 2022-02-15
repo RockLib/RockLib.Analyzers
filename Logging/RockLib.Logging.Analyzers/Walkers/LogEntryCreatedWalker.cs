@@ -28,11 +28,13 @@ namespace RockLib.Logging.Analyzers
         public override void VisitCatchClause(ICatchClauseOperation catchClause)
         {
             if (IsExceptionSet)
+            {
                 return;
+            }
 
             if (_createOperation.Arguments.Length > 0)
             {
-                var exceptionArgument = _createOperation.Arguments.FirstOrDefault(a => a.Parameter.Name == "exception");
+                var exceptionArgument = _createOperation.Arguments.FirstOrDefault(a => a.Parameter!.Name == "exception");
                 if (exceptionArgument != null
                     && !exceptionArgument.IsImplicit
                     && exceptionArgument.Value is ILocalReferenceOperation localReference
@@ -49,7 +51,7 @@ namespace RockLib.Logging.Analyzers
                     && catchClause.ExceptionDeclarationOrExpression is IVariableDeclaratorOperation catchVariableDeclarator)
                 {
                     var doesCaughtExceptionMatchArgument = SymbolEqualityComparer.Default.Equals(convertedLocalReference.Local, catchVariableDeclarator.Symbol);
-                    IsExceptionSet = conversion.Type.IsException(_exceptionType, _compilation)
+                    IsExceptionSet = conversion.Type!.IsException(_exceptionType, _compilation)
                        && doesCaughtExceptionMatchArgument;
                     return;
                 }
