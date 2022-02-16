@@ -21,7 +21,7 @@ namespace RockLib.Logging.Analyzers
         public const string PassExceptionToLogEntryConstructorTitle = "Pass exception to LogEntry constructor";
         public const string SetLogEntryExceptionPropertyTitle = "Set LogEntry.Exception property";
         public const string PassExceptionToLoggingExtensionMethodTitle = "Pass exception to logging extension method";
-
+        
         public override sealed ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(DiagnosticIds.CaughtExceptionShouldBeLogged);
 
         public override sealed FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
