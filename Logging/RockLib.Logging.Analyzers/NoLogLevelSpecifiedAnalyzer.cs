@@ -10,7 +10,7 @@ using System.Linq;
 namespace RockLib.Logging.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class NoLogLevelSpecifiedAnalyzer : DiagnosticAnalyzer
+    public sealed class NoLogLevelSpecifiedAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString _title = "No log level specified";
         private static readonly LocalizableString _messageFormat = "The Level of the LogEntry is not specified";
@@ -49,7 +49,7 @@ namespace RockLib.Logging.Analyzers
             context.RegisterOperationAction(analyzer.Analyze, OperationKind.Invocation);
         }
 
-        private class InvocationOperationAnalyzer
+        private sealed class InvocationOperationAnalyzer
         {
             private readonly INamedTypeSymbol _iloggerType;
             private readonly INamedTypeSymbol _logLevelType;
@@ -96,7 +96,7 @@ namespace RockLib.Logging.Analyzers
                     }
                 }
 
-                if (logEntryCreation.Initializer != null)
+                if (logEntryCreation.Initializer is not null)
                 {
                     foreach (var initializer in logEntryCreation.Initializer.Initializers)
                     {
@@ -119,7 +119,7 @@ namespace RockLib.Logging.Analyzers
                 return false;
             }
 
-            private class SimpleAssignmentWalker : OperationWalker
+            private sealed class SimpleAssignmentWalker : OperationWalker
             {
                 private readonly INamedTypeSymbol _logLevelType;
                 private readonly ILocalReferenceOperation _logEntryReference;

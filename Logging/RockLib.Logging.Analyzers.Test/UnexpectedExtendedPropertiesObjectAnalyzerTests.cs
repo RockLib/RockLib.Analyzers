@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace RockLib.Logging.Analyzers.Test
 {
-    public class UnexpectedExtendedPropertiesObjectAnalyzerTests
+    public static class UnexpectedExtendedPropertiesObjectAnalyzerTests
     {
-        [Fact(DisplayName = "Diagnostics are reported when logging with a non-anon type")]
-        public async Task DiagnosticReported1()
+        [Fact]
+        public static async Task AnalyzeWhenLoggingWithNonAnonymousType()
         {
-            await TestAssistants.VerifyAnalyzerAsync<UnexpectedExtendedPropertiesObjectAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<UnexpectedExtendedPropertiesObjectAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Collections.Generic;
@@ -36,11 +36,11 @@ public class TestClass
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are not reported when logging with a anon type")]
-        public async Task DiagnosticReported2()
+        [Fact]
+        public static async Task AnalyzeWhenLoggingWithAnonymousType()
         {
-            await TestAssistants.VerifyAnalyzerAsync<UnexpectedExtendedPropertiesObjectAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<UnexpectedExtendedPropertiesObjectAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Collections.Generic;
@@ -67,12 +67,11 @@ public class TestClass
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when initializing LogEntry with non-anonymous extended prop")]
-        public async Task DiagnosticReported3()
+        [Fact]
+        public static async Task AnalyzeWhenInitializingEntryWithNonAnonymousExtendedProperty()
         {
             await TestAssistants.VerifyAnalyzerAsync<UnexpectedExtendedPropertiesObjectAnalyzer>(
-                @"
-using RockLib.Logging;
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Collections.Generic;
@@ -90,12 +89,11 @@ public class TestClass
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are not reported when initializing LogEntry with anonymous extended prop")]
-        public async Task DiagnosticReported4()
+        [Fact]
+        public static async Task AnalyzeWhenInitializingEntryWithAnonymousExtendedProperty()
         {
             await TestAssistants.VerifyAnalyzerAsync<UnexpectedExtendedPropertiesObjectAnalyzer>(
-                @"
-using RockLib.Logging;
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Collections.Generic;

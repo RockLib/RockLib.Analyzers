@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace RockLib.Logging.Analyzers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(CaughtExceptionShouldBeLoggedCodeFixProvider)), Shared]
-    public class CaughtExceptionShouldBeLoggedCodeFixProvider : CodeFixProvider
+    public sealed class CaughtExceptionShouldBeLoggedCodeFixProvider : CodeFixProvider
     {
         public const string PassExceptionToLogEntryConstructorTitle = "Pass exception to LogEntry constructor";
         public const string SetLogEntryExceptionPropertyTitle = "Set LogEntry.Exception property";
@@ -120,7 +120,7 @@ namespace RockLib.Logging.Analyzers
             var logEntryCreationExpression = (BaseObjectCreationExpressionSyntax)logEntryCreationOperation.Syntax;
             BaseObjectCreationExpressionSyntax replacementLogEntryCreationExpression;
 
-            if (logEntryCreationOperation.Initializer != null
+            if (logEntryCreationOperation.Initializer is not null
                 && logEntryCreationOperation.Initializer.Initializers.Length > 0)
             {
                 var expressions = logEntryCreationExpression.Initializer!.Expressions.ToList();
@@ -202,13 +202,13 @@ namespace RockLib.Logging.Analyzers
             var exceptionArgument = SyntaxFactory.Argument(exceptionParameter);
             var arguments = argumentsToFix.ToList();
 
-            if (!arguments.Any(a => a.NameColon != null))
+            if (!arguments.Any(a => a.NameColon is not null))
             {
                 if (argumentOperations
                     .FirstOrDefault(a => a.Parameter!.Name == "exception")
                     ?.Syntax is ArgumentSyntax existingExceptionArgument)
                 {
-                    for (int i = 0; i < arguments.Count; i++)
+                    for (var i = 0; i < arguments.Count; i++)
                     {
                         if (arguments[i] == existingExceptionArgument)
                         {
@@ -230,7 +230,7 @@ namespace RockLib.Logging.Analyzers
                     .FirstOrDefault(a => a.Parameter!.Name == "exception")
                     ?.Syntax is ArgumentSyntax existingExceptionArgument)
                 {
-                    for (int i = 0; i < arguments.Count; i++)
+                    for (var i = 0; i < arguments.Count; i++)
                     {
                         if (arguments[i] == existingExceptionArgument)
                         {
@@ -308,7 +308,7 @@ namespace RockLib.Logging.Analyzers
         private static ICatchClauseOperation? GetCatchClause(IInvocationOperation invocationOperation)
         {
             var parent = invocationOperation.Parent;
-            while (parent != null)
+            while (parent is not null)
             {
                 if (parent is ICatchClauseOperation catchClause)
                 {
@@ -322,7 +322,7 @@ namespace RockLib.Logging.Analyzers
         private static CatchClauseSyntax? GetCatchClause(SyntaxNode node)
         {
             var parent = node.Parent;
-            while (parent != null)
+            while (parent is not null)
             {
                 if (parent is CatchClauseSyntax catchClause)
                 {

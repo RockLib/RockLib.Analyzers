@@ -3,10 +3,10 @@ using Xunit;
 
 namespace RockLib.Logging.Analyzers.Test
 {
-    public class NoLogLevelSpecifiedAnalyzerTests
+    public static class NoLogLevelSpecifiedAnalyzerTests
     {
-        [Fact(DisplayName = null)]
-        public async Task DiagnosticsReported1()
+        [Fact]
+        public static async Task AnalyzeWhenLevelIsNotSet()
         {
             await TestAssistants.VerifyAnalyzerAsync<NoLogLevelSpecifiedAnalyzer>(@"
 using RockLib.Logging;
@@ -29,8 +29,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = null)]
-        public async Task NoDiagnosticsReported1()
+        [Fact]
+        public static async Task AnalyzeWhenLevelIsSet()
         {
             await TestAssistants.VerifyAnalyzerAsync<NoLogLevelSpecifiedAnalyzer>(@"
 using RockLib.Logging;

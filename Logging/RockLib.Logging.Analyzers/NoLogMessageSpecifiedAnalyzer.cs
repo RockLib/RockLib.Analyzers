@@ -10,7 +10,7 @@ using System.Linq;
 namespace RockLib.Logging.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class NoLogMessageSpecifiedAnalyzer : DiagnosticAnalyzer
+    public sealed class NoLogMessageSpecifiedAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString _title = "No message specified";
         private static readonly LocalizableString _messageFormat = "The message cannot be null or empty";
@@ -54,7 +54,7 @@ namespace RockLib.Logging.Analyzers
             context.RegisterOperationAction(analyzer.AnalyzeInvocation, OperationKind.Invocation);
         }
 
-        private class OperationAnalyzer
+        private sealed class OperationAnalyzer
         {
             private readonly INamedTypeSymbol _iloggerType;
             private readonly INamedTypeSymbol _loggingExtensionType;
@@ -108,7 +108,7 @@ namespace RockLib.Logging.Analyzers
 
                 }
 
-                if (syntaxLocation != null)
+                if (syntaxLocation is not null)
                 {
                     var diagnostic = Diagnostic.Create(Rule, syntaxLocation);
                     context.ReportDiagnostic(diagnostic);
@@ -122,12 +122,12 @@ namespace RockLib.Logging.Analyzers
                     var levelArgument = logEntryCreation.Arguments.First(a => a.Parameter!.Name == "message");
                     if (!levelArgument.IsImplicit
                         && levelArgument.Value.ConstantValue.HasValue
-                        && levelArgument.Value.ConstantValue.Value != null
+                        && levelArgument.Value.ConstantValue.Value is not null
                         && !string.IsNullOrEmpty(levelArgument.Value.ConstantValue.Value.ToString()))
                         return true;
                 }
 
-                if (logEntryCreation.Initializer != null)
+                if (logEntryCreation.Initializer is not null)
                 {
                     foreach (var initializer in logEntryCreation.Initializer.Initializers)
                     {
@@ -135,7 +135,7 @@ namespace RockLib.Logging.Analyzers
                             && assignment.Target is IPropertyReferenceOperation property
                             && SymbolEqualityComparer.Default.Equals(property.Type, _stringType)
                             && assignment.Value.ConstantValue.HasValue
-                            && assignment.Value.ConstantValue.Value != null
+                            && assignment.Value.ConstantValue.Value is not null
                             && !string.IsNullOrEmpty(assignment.Value.ConstantValue.Value.ToString()))
                         {
                             return true;
@@ -153,7 +153,7 @@ namespace RockLib.Logging.Analyzers
                 return false;
             }
 
-            private class SimpleAssignmentWalker : OperationWalker
+            private sealed class SimpleAssignmentWalker : OperationWalker
             {
                 private readonly INamedTypeSymbol _stringType;
                 private readonly ILocalReferenceOperation _logEntryReference;
@@ -172,7 +172,7 @@ namespace RockLib.Logging.Analyzers
                         && SymbolEqualityComparer.Default.Equals(property.Type, _stringType)
                         && property.Parent is ISimpleAssignmentOperation parentProperty
                         && parentProperty.Value.ConstantValue.HasValue
-                        && parentProperty.Value.ConstantValue.Value != null
+                        && parentProperty.Value.ConstantValue.Value is not null
                         && !string.IsNullOrEmpty(parentProperty.Value.ConstantValue.Value.ToString())
                         && property.Instance is ILocalReferenceOperation local
                         && SymbolEqualityComparer.Default.Equals(local.Local, _logEntryReference.Local))

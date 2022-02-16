@@ -5,10 +5,10 @@ using Xunit;
 
 namespace RockLib.Logging.Analyzers.Test
 {
-    public class ExtendedPropertyNotMarkedSafeToLogAnalyzerTests
+    public static class ExtendedPropertyNotMarkedSafeToLogAnalyzerTests
     {
-        [Fact(DisplayName = "Diagnostics are reported when extended property type is not marked as safe to log")]
-        public async Task DiagnosticsReported1()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsNotMarkedAsSafeToLog()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -18,8 +18,8 @@ namespace RockLib.Logging.Analyzers.Test
                     classDecoration: Decoration.None)).ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when extended property type is decorated with [SafeToLog] but all properties are decorated with [NotSafeToLog]")]
-        public async Task DiagnosticsReported2()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsDecoratedAsSafeButAllPropertiesAreDecoratedAsNotSafe()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -29,8 +29,8 @@ namespace RockLib.Logging.Analyzers.Test
                     classDecoration: Decoration.SafeToLog)).ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostrics are reported when extended property type is decorated with SafeToLogAttribute at runtime but all properties are decorated with NotSafeToLogAttribute at runtime")]
-        public async Task DiagnosticsReported3()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsDecoratedAsSafeAtRuntimeButAllPropertiesAreDecoratedAsNotSafe()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -49,8 +49,8 @@ public class Program
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property type has property decorated with [SafeToLog]")]
-        public async Task NoDiagnosticsReported1()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeHasPropertyDecoratedAsSafe()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -60,8 +60,8 @@ public class Program
                     classDecoration: Decoration.None)).ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property type is decorated with [SafeToLog]")]
-        public async Task NoDiagnosticsReported2()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsDecoratedAsSafe()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -71,7 +71,7 @@ public class Program
                     classDecoration: Decoration.SafeToLog)).ConfigureAwait(false);
         }
 
-        [Theory(DisplayName = "No diagnostics are reported for extended properties of specified type")]
+        [Theory]
         [InlineData("string")]
         [InlineData("bool")]
         [InlineData("char")]
@@ -96,7 +96,7 @@ public class Program
         [InlineData("System.Text.Encoding")]
         [InlineData("Type")]
         [InlineData("TypeCode")]
-        public async Task NoDiagnosticsReported3(string extendedPropertyType)
+        public static async Task AnalyzeWhenSpecificExtendedPropertyTypeIsDecoratedAsSafe(string extendedPropertyType)
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -106,8 +106,8 @@ public class Program
                     classDecoration: Decoration.None)).ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property base type has property marked with [SafeToLog]")]
-        public async Task NoDiagnosticsReported4()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyBaseTypeHasPropertyDecoratedAsSafe()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -121,8 +121,8 @@ public class TestClassDerived : TestClass
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property type is decorated with [SafeToLog] but properties are defined in base type")]
-        public async Task NoDiagnosticsReported5()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsDecoratedAsSafeAndPropertiesAreDefinedInBaseType()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -137,8 +137,8 @@ public class TestClassDerived : TestClass
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property type is decorated with SafeToLogAttribute at runtime (generic method)")]
-        public async Task NoDiagnosticsReported6()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsDecoratedAsSafeAtRuntimeWithGenericMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -156,8 +156,8 @@ public class Program
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property type is decorated with SafeToLogAttribute at runtime (non-generic method)")]
-        public async Task NoDiagnosticsReported7()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeIsDecoratedAsSafeAtRuntimeWithNonGenericMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(
@@ -175,8 +175,8 @@ public class Program
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when extended property type has property decorated with SafeToLogAttribute at runtime")]
-        public async Task NoDiagnosticsReported8()
+        [Fact]
+        public static async Task AnalyzeWhenExtendedPropertyTypeHasPropertyDecoratedAsSafeAtRuntime()
         {
             await TestAssistants.VerifyAnalyzerAsync<ExtendedPropertyNotMarkedSafeToLogAnalyzer>(
                 GetTestCode(

@@ -3,10 +3,10 @@ using Xunit;
 
 namespace RockLib.Logging.Analyzers.Test
 {
-    public class CaughtExceptionShouldBeLoggedAnalyzerTests
+    public static class CaughtExceptionShouldBeLoggedAnalyzerTests
     {
-        [Fact(DisplayName = "Diagnostics are reported when exception is not passed to logging extension methods")]
-        public async Task DiagnosticsReported1()
+        [Fact]
+        public static async Task AnalyzeWhenExceptionIsNotPassedToExtensionMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -41,8 +41,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when exception is not passed to log entry")]
-        public async Task DiagnosticsReported2()
+        [Fact]
+        public static async Task AnalyzeWhenExceptionIsNotPassedToEntry()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -73,8 +73,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when null exception is passed to logging extension methods")]
-        public async Task DiagnosticsReported3()
+        [Fact]
+        public static async Task AnalyzeWhenNullIsPassedToExtensionMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -109,8 +109,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when null exception is passed to log entry")]
-        public async Task DiagnosticsReported4()
+        [Fact]
+        public static async Task AnalyzeWhenNullIsPassedToEntry()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -142,8 +142,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when some other exception is passed to logging extension methods")]
-        public async Task DiagnosticsReported5()
+        [Fact]
+        public static async Task AnalyzeWhenIncorrectExceptionIsPassedToExtensionMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -179,8 +179,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when some other exception is passed to log entry")]
-        public async Task DiagnosticsReported6()
+        [Fact]
+        public static async Task AnalyzeWhenIncorrectExceptionIsPassedToEntry()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -213,8 +213,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when multiple catch blocks occur with LogEntry and exception not provided")]
-        public async Task DiagnosticsReported7()
+        [Fact]
+        public static async Task AnalyzeWhenMultipleExceptionsAreNotPassedToExtensionMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -244,8 +244,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are reported when multiple catch blocks occur and caught exception is not passed to logging method")]
-        public async Task DiagnosticsReported8()
+        [Fact]
+        public static async Task AnalyzeWhenIncorrectExceptionIsPassedToLogMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -294,8 +294,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when exception is passed to logging extension methods")]
-        public async Task NoDiagnosticsReported1()
+        [Fact]
+        public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToExtensionMethod()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -330,8 +330,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when exception is passed to log entry constructor")]
-        public async Task NoDiagnosticsReported2()
+        [Fact]
+        public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToEntry()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -355,8 +355,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when exception is passed to log entry constructor initializer")]
-        public async Task NoDiagnosticsReported3()
+        [Fact]
+        public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToConstructor()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -383,8 +383,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "No diagnostics are reported when exception is passed to log entry property setter")]
-        public async Task NoDiagnosticsReported4()
+        [Fact]
+        public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToPropertySetter()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -409,8 +409,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are not reported when exception is filtered and logged")]
-        public async Task NoDiagnosticsReported5()
+        [Fact]
+        public static async Task AnalyzeWhenCaughtExceptionIsFilteredAndLogged()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -445,8 +445,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are not reported when multiple catch blocks occur with LogEntry")]
-        public async Task NoDiagnosticsReported6()
+        [Fact]
+        public static async Task AnalyzeWhenMutlipleCaughtExceptionIsFilteredAndLogged()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;
@@ -476,8 +476,8 @@ public class Test
 }").ConfigureAwait(false);
         }
 
-        [Fact(DisplayName = "Diagnostics are not reported when multiple catch blocks occur and caught exception is passed to logging method")]
-        public async Task NoDiagnosticsReported7()
+        [Fact]
+        public static async Task AnalyzeWhenMultipleCaughtExceptionsAreLogged()
         {
             await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
 using RockLib.Logging;

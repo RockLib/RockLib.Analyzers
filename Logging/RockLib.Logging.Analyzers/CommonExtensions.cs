@@ -47,7 +47,7 @@ namespace RockLib.Logging.Analyzers
                 }
             }
 
-            return anonymousObjectCreationOperation != null;
+            return anonymousObjectCreationOperation is not null;
         }
 
         internal static bool TryGetDictionaryExtendedPropertyValueOperations(this IOperation extendedPropertiesArgumentValue,
@@ -123,7 +123,7 @@ namespace RockLib.Logging.Analyzers
                     return true;
             }
 
-            if (type.BaseType != null && type.BaseType.ToString() == "System.Enum")
+            if (type.BaseType is not null && type.BaseType.ToString() == "System.Enum")
             {
                 return true;
             }
@@ -168,7 +168,7 @@ namespace RockLib.Logging.Analyzers
             var extendedPropertyValues = addMethodValues
                 .Concat(indexerAssignmentValues)
                 .Concat(localDeclarationCollectionInitializerValues)
-                .Where(value => value != null)
+                .Where(value => value is not null)
                 .Select(operation =>
                 {
                     if (operation is IConversionOperation conversionOperation)
@@ -234,7 +234,7 @@ namespace RockLib.Logging.Analyzers
                     var variableDeclarator = (IVariableDeclaratorOperation)semanticModel.GetOperation(variable)!;
                     if (SymbolEqualityComparer.Default.Equals(variableDeclarator.Symbol, extendedPropertiesSymbol)
                         && variableDeclarator.Initializer?.Value is IObjectCreationOperation objectCreation
-                        && objectCreation.Initializer != null)
+                        && objectCreation.Initializer is not null)
                     {
                         foreach (var initializer in objectCreation.Initializer.Initializers)
                         {
@@ -257,7 +257,7 @@ namespace RockLib.Logging.Analyzers
             }
         }
 
-        private class Find<TOperation> : OperationWalker
+        private sealed class Find<TOperation> : OperationWalker
             where TOperation : IOperation
         {
             private readonly ILocalSymbol _localSymbol;

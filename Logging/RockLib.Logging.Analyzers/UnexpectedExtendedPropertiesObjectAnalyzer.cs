@@ -12,7 +12,7 @@ using System.Linq;
 namespace RockLib.Logging.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class UnexpectedExtendedPropertiesObjectAnalyzer : DiagnosticAnalyzer
+    public sealed class UnexpectedExtendedPropertiesObjectAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString _title = "Unexpected extended properties object";
         private static readonly LocalizableString _messageFormat = "Unexpected type '{0}' used for extended properties";
@@ -58,7 +58,7 @@ namespace RockLib.Logging.Analyzers
             context.RegisterOperationAction(analyzer.AnalyzeObjectCreation, OperationKind.ObjectCreation);
         }
 
-        private class OperationAnalyzer
+        private sealed class OperationAnalyzer
         {
             private readonly INamedTypeSymbol _loggerType;
             private readonly INamedTypeSymbol _logEntryType;
@@ -66,9 +66,9 @@ namespace RockLib.Logging.Analyzers
             private readonly INamedTypeSymbol _safeLoggingExtensionsType;
 
             public OperationAnalyzer(INamedTypeSymbol loggerType,
-                                                INamedTypeSymbol logEntryType,
-                                                INamedTypeSymbol loggingExtensionsType,
-                                                INamedTypeSymbol safeLoggingExtensionsType)
+                INamedTypeSymbol logEntryType,
+                INamedTypeSymbol loggingExtensionsType,
+                INamedTypeSymbol safeLoggingExtensionsType)
             {
                 _loggerType = loggerType;
                 _logEntryType = logEntryType;

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace RockLib.Logging.Analyzers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NoLogLevelSpecifiedCodeFixProvider)), Shared]
-    public class NoLogLevelSpecifiedCodeFixProvider : CodeFixProvider
+    public sealed class NoLogLevelSpecifiedCodeFixProvider : CodeFixProvider
     {
         public const string SetLevelPropertyTo = "Set LogEntry.Level to ";
         public const string SetLevelParameterTo = "Set LogEntry.Level to ";

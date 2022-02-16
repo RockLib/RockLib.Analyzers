@@ -9,7 +9,7 @@ using System.Globalization;
 namespace RockLib.Logging.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class CaughtExceptionShouldBeLoggedAnalyzer : DiagnosticAnalyzer
+    public sealed class CaughtExceptionShouldBeLoggedAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString _title = "Caught exception should be logged";
         private static readonly LocalizableString _messageFormat = "The caught exception should be passed into the logging method";
@@ -53,7 +53,7 @@ namespace RockLib.Logging.Analyzers
             context.RegisterOperationAction(analyzer.Analyze, OperationKind.Invocation);
         }
 
-        private class InvocationOperationAnalyzer
+        private sealed class InvocationOperationAnalyzer
         {
             private readonly INamedTypeSymbol _loggingExtensionsType;
             private readonly INamedTypeSymbol _safeLoggingExtensionsType;
@@ -104,7 +104,9 @@ namespace RockLib.Logging.Analyzers
                     }
                 }
                 else
+                {
                     return;
+                }
 
                 var diagnostic = Diagnostic.Create(Rule, invocationOperation.Syntax.GetLocation());
                 context.ReportDiagnostic(diagnostic);
@@ -113,7 +115,7 @@ namespace RockLib.Logging.Analyzers
             private static ICatchClauseOperation? GetCatchClause(IInvocationOperation invocationOperation)
             {
                 var parent = invocationOperation.Parent;
-                while (parent != null)
+                while (parent is not null)
                 {
                     //TODO: Other catch operations?
                     if (parent is ICatchClauseOperation catchClause)
@@ -131,7 +133,6 @@ namespace RockLib.Logging.Analyzers
                 if (catchClause.ExceptionDeclarationOrExpression is not null)
                 {
                     var logWalker = new LogEntryCreatedWalker(logEntryArgumentValue, logEntryCreation, _exceptionType, compilation);
-                    logWalker.Visit(logEntryCreation.GetRootOperation());
                     return logWalker.IsExceptionSet;
                 }
 

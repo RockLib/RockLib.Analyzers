@@ -14,7 +14,7 @@ using System.Threading;
 namespace RockLib.Logging.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ExtendedPropertyNotMarkedSafeToLogAnalyzer : DiagnosticAnalyzer
+    public sealed class ExtendedPropertyNotMarkedSafeToLogAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString _title = "Extended property not marked as safe to log";
         private static readonly LocalizableString _messageFormat = "The '{0}' type does not have any properties marked as safe to log";
@@ -60,7 +60,7 @@ namespace RockLib.Logging.Analyzers
             context.RegisterOperationAction(analyzer.Analyze, OperationKind.Invocation);
         }
 
-        private class InvocationOperationAnalyzer
+        private sealed class InvocationOperationAnalyzer
         {
             private readonly INamedTypeSymbol _logEntryType;
             private readonly INamedTypeSymbol _safeLoggingExtensionsType;
@@ -87,15 +87,25 @@ namespace RockLib.Logging.Analyzers
                 var methodSymbol = invocationOperation.TargetMethod;
 
                 if (methodSymbol.MethodKind != MethodKind.Ordinary)
+                {
                     return;
+                }
 
                 if (SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _safeLoggingExtensionsType))
+                {
                     AnalyzeExtendedPropertiesArgument(context, invocationOperation);
+                }
                 else if (SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _logEntryType))
+                {
                     if (methodSymbol.Name == "SetSanitizedExtendedProperty")
+                    {
                         AnalyzeSetSanitizedExtendedPropertyMethodCall(context, invocationOperation);
+                    }
                     else if (methodSymbol.Name == "SetSanitizedExtendedProperties")
+                    {
                         AnalyzeExtendedPropertiesArgument(context, invocationOperation);
+                    }
+                }
             }
 
             private void AnalyzeSetSanitizedExtendedPropertyMethodCall(OperationAnalysisContext context,
@@ -171,8 +181,7 @@ namespace RockLib.Logging.Analyzers
                 out IReadOnlyList<ISymbol> runtimeSafeToLogTargets,
                 out IReadOnlyList<ISymbol> runtimeNotSafeToLogTargets)
             {
-                var visitor = new SyntaxWalker(_safeToLogAttributeType, _notSafeToLogAttributeType, _cancellationToken);
-                visitor.Visit(_compilation);
+                var visitor = new SyntaxWalker(_safeToLogAttributeType, _notSafeToLogAttributeType, _compilation, _cancellationToken);
                 runtimeSafeToLogTargets = visitor.SafeToLogTargets;
                 runtimeNotSafeToLogTargets = visitor.NotSafeToLogTargets;
             }
@@ -189,37 +198,35 @@ namespace RockLib.Logging.Analyzers
                 && !notSafeToLogDecorateTargets.Any(target =>
                     SymbolEqualityComparer.Default.Equals(symbol, target));
 
-            private class SyntaxWalker : CSharpSyntaxWalker
+            private sealed class SyntaxWalker : CSharpSyntaxWalker
             {
                 private readonly List<ISymbol> _safeToLogTargets = new List<ISymbol>();
                 private readonly List<ISymbol> _notSafeToLogTargets = new List<ISymbol>();
                 private readonly INamedTypeSymbol _safeToLogAttributeType;
                 private readonly INamedTypeSymbol _notSafeToLogAttributeType;
                 private readonly CancellationToken _cancellationToken;
-                private Compilation? _compilation;
+                private readonly Compilation _compilation;
 
                 // TODO: Pass the compilation in on construction
                 // and call Visit(compilation) right away...well, the "root" one.
                 // Make sure tests pass first.
-                public SyntaxWalker(INamedTypeSymbol safeToLogAttributeType, INamedTypeSymbol notSafeToLogAttributeType, CancellationToken cancellationToken)
+                public SyntaxWalker(INamedTypeSymbol safeToLogAttributeType, INamedTypeSymbol notSafeToLogAttributeType, 
+                    Compilation compilation, CancellationToken cancellationToken)
                 {
                     _safeToLogAttributeType = safeToLogAttributeType;
                     _notSafeToLogAttributeType = notSafeToLogAttributeType;
                     _cancellationToken = cancellationToken;
-                }
-
-                public IReadOnlyList<ISymbol> SafeToLogTargets => _safeToLogTargets;
-                
-                public IReadOnlyList<ISymbol> NotSafeToLogTargets => _notSafeToLogTargets;
-
-                public void Visit(Compilation compilation)
-                {
                     _compilation = compilation;
+
                     foreach (var syntaxTree in compilation.SyntaxTrees)
                     {
                         Visit(syntaxTree.GetRoot(_cancellationToken));
                     }
                 }
+
+                public IReadOnlyList<ISymbol> SafeToLogTargets => _safeToLogTargets;
+                
+                public IReadOnlyList<ISymbol> NotSafeToLogTargets => _notSafeToLogTargets;
 
                 public override void VisitInvocationExpression(InvocationExpressionSyntax node)
                 {

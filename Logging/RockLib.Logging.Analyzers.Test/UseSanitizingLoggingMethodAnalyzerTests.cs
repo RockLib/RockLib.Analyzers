@@ -5,10 +5,10 @@ using Xunit;
 
 namespace RockLib.Logging.Analyzers.Test
 {
-    public class UseSanitizingLoggingMethodAnalyzerTests
+    public static class UseSanitizingLoggingMethodAnalyzerTests
     {
-        [Fact(DisplayName = "Diagnostics are reported when setting extended property with a non-value type")]
-        public async Task DiagnosticsReported()
+        [Fact]
+        public static async Task AnalyzeWhenSettingExtendedPropertyWithNonValueType()
         {
             await TestAssistants.VerifyAnalyzerAsync<UseSanitizingLoggingMethodAnalyzer>(
                 GetTestCode(
@@ -16,7 +16,7 @@ namespace RockLib.Logging.Analyzers.Test
                     shouldReportDiagnostic: true)).ConfigureAwait(false);
         }
 
-        [Theory(DisplayName = "No diagnostics are reported for extended properties of specified type")]
+        [Theory]
         [InlineData("string")]
         [InlineData("bool")]
         [InlineData("char")]
@@ -41,7 +41,7 @@ namespace RockLib.Logging.Analyzers.Test
         [InlineData("System.Text.Encoding")]
         [InlineData("Type")]
         [InlineData("TypeCode")]
-        public async Task NoDiagnosticsReported(string extendedPropertyType)
+        public static async Task AnalyzextendedPropertiesOfSpecifiedType(string extendedPropertyType)
         {
             await TestAssistants.VerifyAnalyzerAsync<UseSanitizingLoggingMethodAnalyzer>(
                 GetTestCode(

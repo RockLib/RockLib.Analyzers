@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace RockLib.Logging.Analyzers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UseSanitizingLoggingMethodCodeFixProvider)), Shared]
-    public class UseSanitizingLoggingMethodCodeFixProvider : CodeFixProvider
+    public sealed class UseSanitizingLoggingMethodCodeFixProvider : CodeFixProvider
     {
         public const string ChangeToSetSanitizedExtendedPropertiesTitle = "Change to SetSanitizedExtendedProperties";
         public const string ChangeToSanitizingLoggingExtensionMethodTitle = "Change to sanitizing logging extension method";

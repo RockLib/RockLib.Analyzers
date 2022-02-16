@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace RockLib.Logging.Analyzers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UnexpectedExtendedPropertiesCodeFixProvider)), Shared]
-    public class UnexpectedExtendedPropertiesCodeFixProvider : CodeFixProvider
+    public sealed class UnexpectedExtendedPropertiesCodeFixProvider : CodeFixProvider
     {
         public const string ReplaceWithAnonymousObjectTitle = "Replace with anonymous object";
 
@@ -136,7 +136,7 @@ namespace RockLib.Logging.Analyzers
                 .FirstOrDefault(a => a.Parameter!.Name == "extendedProperties")
                 ?.Syntax is ArgumentSyntax existingExceptionArgument)
             {
-                for (int i = 0; i < arguments.Count; i++)
+                for (var i = 0; i < arguments.Count; i++)
                 {
                     if (arguments[i] == existingExceptionArgument)
                     {

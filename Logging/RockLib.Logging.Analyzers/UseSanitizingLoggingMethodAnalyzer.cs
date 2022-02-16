@@ -11,7 +11,7 @@ using System.Linq;
 namespace RockLib.Logging.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class UseSanitizingLoggingMethodAnalyzer : DiagnosticAnalyzer
+    public sealed class UseSanitizingLoggingMethodAnalyzer : DiagnosticAnalyzer
     {
         private static readonly LocalizableString _title = "Use sanitizing logging method";
         private static readonly LocalizableString _messageFormat = "Call {0} instead of {1} in order to sanitize extended properties";
@@ -52,7 +52,7 @@ namespace RockLib.Logging.Analyzers
             context.RegisterOperationAction(analyzer.AnalyzeObjectCreation, OperationKind.ObjectCreation);
         }
 
-        private class OperationAnalyzer
+        private sealed class OperationAnalyzer
         {
             private readonly INamedTypeSymbol _logEntryType;
             private readonly INamedTypeSymbol _loggingExtensionsType;

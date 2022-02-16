@@ -3,10 +3,10 @@ using Xunit;
 
 namespace RockLib.Logging.Analyzers.Test
 {
-    public class NoLogLevelSpecifiedCodeFixProviderTests
+    public static class NoLogLevelSpecifiedCodeFixProviderTests
     {
         [Fact(DisplayName = null)]
-        public async Task VerifyWhenLevelIsNotSpecifiedViaParameter()
+        public static async Task VerifyWhenLevelIsNotSpecifiedViaParameter()
         {
             await TestAssistants.VerifyCodeFixAsync<NoLogLevelSpecifiedAnalyzer, NoLogLevelSpecifiedCodeFixProvider>(
 @"using RockLib.Logging;
@@ -38,7 +38,7 @@ public class Test
         }
         
         [Fact(DisplayName = null)]
-        public async Task VerifyWhenLevelIsNotSpecifiedViaProperty()
+        public static async Task VerifyWhenLevelIsNotSpecifiedViaProperty()
         {
             await TestAssistants.VerifyCodeFixAsync<NoLogLevelSpecifiedAnalyzer, NoLogLevelSpecifiedCodeFixProvider>(
 @"using RockLib.Logging;
