@@ -39,16 +39,16 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var iloggerType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.ILogger");
-            if (iloggerType == null) { return; }
+            if (iloggerType is null) { return; }
 
             var loggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LoggingExtensions");
-            if (loggingExtensionsType == null) { return; }
+            if (loggingExtensionsType is null) { return; }
 
             var safeLoggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.SafeLoggingExtensions");
-            if (safeLoggingExtensionsType == null) { return; }
+            if (safeLoggingExtensionsType is null) { return; }
 
             var stringType = context.Compilation.GetTypeByMetadataName("System.String");
-            if (stringType == null) { return; }
+            if (stringType is null) { return; }
 
             var analyzer = new OperationAnalyzer(iloggerType, loggingExtensionsType, safeLoggingExtensionsType, stringType);
             context.RegisterOperationAction(analyzer.AnalyzeInvocation, OperationKind.Invocation);
@@ -81,7 +81,7 @@ namespace RockLib.Logging.Analyzers
                     var logEntryArgument = invocationOperation.Arguments[0];
                     var logEntryCreation = logEntryArgument.GetLogEntryCreationOperation();
 
-                    if (logEntryCreation == null
+                    if (logEntryCreation is null
                        || IsMessageSet(logEntryCreation, logEntryArgument.Value))
                     {
                         return;
@@ -96,7 +96,7 @@ namespace RockLib.Logging.Analyzers
                     var messageArg = arguments.First(argument => argument.Parameter!.Name == "message");
 
                     if (messageArg.Value.ConstantValue.HasValue
-                        && (messageArg.Value.ConstantValue.Value == null
+                        && (messageArg.Value.ConstantValue.Value is null
                         || string.IsNullOrEmpty(messageArg.Value.ConstantValue.Value.ToString())))
                     {
                         syntaxLocation = messageArg.Syntax.GetLocation();

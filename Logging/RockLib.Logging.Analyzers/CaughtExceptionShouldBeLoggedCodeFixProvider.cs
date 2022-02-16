@@ -274,7 +274,7 @@ namespace RockLib.Logging.Analyzers
             var replacementCatchClause = catchClause.ReplaceNode(expression, replacementExpression);
 
             TypeSyntax exceptionType;
-            if (catchClause.Declaration == null)
+            if (catchClause.Declaration is null)
             {
                 replacementCatchClause = replacementCatchClause
                     .WithCatchKeyword(catchClause.CatchKeyword.WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia(" ")));

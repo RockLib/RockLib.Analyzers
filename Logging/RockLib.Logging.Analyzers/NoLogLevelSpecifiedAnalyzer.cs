@@ -39,10 +39,10 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var iloggerType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.ILogger");
-            if (iloggerType == null) { return; }
+            if (iloggerType is null) { return; }
 
             var logLevelType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LogLevel");
-            if (logLevelType == null) { return; }
+            if (logLevelType is null) { return; }
 
             var analyzer = new InvocationOperationAnalyzer(iloggerType, logLevelType);
 
@@ -75,7 +75,7 @@ namespace RockLib.Logging.Analyzers
                 var logEntryArgument = invocationOperation.Arguments[0];
                 var logEntryCreation = logEntryArgument.GetLogEntryCreationOperation();
 
-                if (logEntryCreation == null
+                if (logEntryCreation is null
                     || IsLevelSet(logEntryCreation, logEntryArgument.Value))
                 {
                     return;

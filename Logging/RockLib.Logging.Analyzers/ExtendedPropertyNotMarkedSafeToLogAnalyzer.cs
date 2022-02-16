@@ -43,16 +43,16 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var logEntryType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LogEntry");
-            if (logEntryType == null) { return; }
+            if (logEntryType is null) { return; }
 
             var safeLoggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.SafeLoggingExtensions");
-            if (safeLoggingExtensionsType == null) { return; }
+            if (safeLoggingExtensionsType is null) { return; }
 
             var safeToLogAttributeType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.SafeToLogAttribute");
-            if (safeToLogAttributeType == null) { return; }
+            if (safeToLogAttributeType is null) { return; }
 
             var notSafeToLogAttributeType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.NotSafeToLogAttribute");
-            if (notSafeToLogAttributeType == null) { return; }
+            if (notSafeToLogAttributeType is null) { return; }
 
             var analyzer = new InvocationOperationAnalyzer(logEntryType, safeLoggingExtensionsType,
                 safeToLogAttributeType, notSafeToLogAttributeType, context.Compilation, context.CancellationToken);
@@ -114,7 +114,7 @@ namespace RockLib.Logging.Analyzers
                 var extendedPropertiesArgument = invocationOperation.Arguments
                         .FirstOrDefault(argument => argument.Parameter!.Name == "extendedProperties");
 
-                if (extendedPropertiesArgument == null
+                if (extendedPropertiesArgument is null
                     || !(extendedPropertiesArgument.Value is IConversionOperation convertToObjectType)
                     || convertToObjectType.Type!.SpecialType != SpecialType.System_Object)
                 {

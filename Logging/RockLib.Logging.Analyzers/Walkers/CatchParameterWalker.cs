@@ -4,20 +4,23 @@ using System.Linq;
 
 namespace RockLib.Logging.Analyzers
 {
-    internal class CatchParameterWalker : OperationWalker
+    internal sealed class CatchParameterWalker : OperationWalker
     {
         private readonly IInvocationOperation _invocationOperation;
         private readonly ITypeSymbol _exceptionType;
         private readonly Compilation _compilation;
 
-        public CatchParameterWalker(IInvocationOperation invocationOperation, ITypeSymbol exceptionType, Compilation compilation)
+        internal CatchParameterWalker(IInvocationOperation invocationOperation, ITypeSymbol exceptionType, Compilation compilation,
+            ICatchClauseOperation catchClause)
         {
             _invocationOperation = invocationOperation;
             _exceptionType = exceptionType;
             _compilation = compilation;
+
+            VisitCatchClause(catchClause);
         }
 
-        public bool IsExceptionCaught { get; private set; }
+        internal bool IsExceptionCaught { get; private set; }
 
         public override void VisitCatchClause(ICatchClauseOperation catchClause)
         {
@@ -27,12 +30,12 @@ namespace RockLib.Logging.Analyzers
             }
 
             var argument = _invocationOperation.Arguments.FirstOrDefault(a => a.Parameter!.Name == "exception");
-            if (argument == null || argument.IsImplicit)
+            if (argument is null || argument.IsImplicit)
             {
                 IsExceptionCaught = false;
             }
             else if (argument.Value is ILocalReferenceOperation localReference
-            && catchClause.ExceptionDeclarationOrExpression is IVariableDeclaratorOperation variableDeclarator)
+                && catchClause.ExceptionDeclarationOrExpression is IVariableDeclaratorOperation variableDeclarator)
             {
                 var isException = localReference.Type!.IsException(_exceptionType, _compilation);
                 IsExceptionCaught = isException && SymbolEqualityComparer.Default.Equals(localReference.Local, variableDeclarator.Symbol);

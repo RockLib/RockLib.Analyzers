@@ -84,7 +84,7 @@ namespace RockLib.Logging.Analyzers
             {
                 type = type.BaseType!;
 
-                if (type == null || type.SpecialType == SpecialType.System_Object)
+                if (type is null || type.SpecialType == SpecialType.System_Object)
                 {
                     break;
                 }

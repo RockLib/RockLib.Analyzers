@@ -38,16 +38,16 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var loggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LoggingExtensions");
-            if (loggingExtensionsType == null) { return; }
+            if (loggingExtensionsType is null) { return; }
 
             var safeLoggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.SafeLogging.SafeLoggingExtensions");
-            if (safeLoggingExtensionsType == null) { return; }
+            if (safeLoggingExtensionsType is null) { return; }
 
             var loggerType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.ILogger");
-            if (loggerType == null) { return; }
+            if (loggerType is null) { return; }
 
             var exceptionType = context.Compilation.GetTypeByMetadataName("System.Exception");
-            if (exceptionType == null) { return; }
+            if (exceptionType is null) { return; }
 
             var analyzer = new InvocationOperationAnalyzer(loggingExtensionsType, exceptionType, safeLoggingExtensionsType, loggerType);
             context.RegisterOperationAction(analyzer.Analyze, OperationKind.Invocation);
@@ -85,10 +85,11 @@ namespace RockLib.Logging.Analyzers
                 if (SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _loggingExtensionsType)
                     || SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _safeLoggingExtensionsType))
                 {
-                    var visitor = new CatchParameterWalker(invocationOperation, _exceptionType, context.Compilation);
-                    visitor.Visit(catchClause);
+                    var visitor = new CatchParameterWalker(invocationOperation, _exceptionType, context.Compilation, catchClause);
                     if (visitor.IsExceptionCaught)
+                    {
                         return;
+                    }
                 }
                 else if (methodSymbol.Name == "Log"
                     && SymbolEqualityComparer.Default.Equals(methodSymbol.ContainingType, _loggerType))
@@ -96,7 +97,7 @@ namespace RockLib.Logging.Analyzers
                     var logEntryArgument = invocationOperation.Arguments[0];
                     var logEntryCreation = logEntryArgument.GetLogEntryCreationOperation();
 
-                    if (logEntryCreation == null
+                    if (logEntryCreation is null
                         || IsExceptionSet(logEntryCreation, logEntryArgument.Value, catchClause, context.Compilation))
                     {
                         return;

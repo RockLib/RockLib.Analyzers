@@ -40,10 +40,10 @@ namespace RockLib.Logging.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var logEntryType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LogEntry");
-            if (logEntryType == null) { return; }
+            if (logEntryType is null) { return; }
 
             var loggingExtensionsType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.LoggingExtensions");
-            if (loggingExtensionsType == null) { return; }
+            if (loggingExtensionsType is null) { return; }
 
             var analyzer = new OperationAnalyzer(logEntryType, loggingExtensionsType);
 
@@ -130,7 +130,7 @@ namespace RockLib.Logging.Analyzers
             {
                 var extendedPropertiesArgument = arguments.FirstOrDefault(argument => argument.Parameter!.Name == "extendedProperties");
 
-                if (extendedPropertiesArgument == null
+                if (extendedPropertiesArgument is null
                     || extendedPropertiesArgument.Value is not IConversionOperation convertToObjectType
                     || convertToObjectType.Type!.SpecialType != SpecialType.System_Object)
                     return;
