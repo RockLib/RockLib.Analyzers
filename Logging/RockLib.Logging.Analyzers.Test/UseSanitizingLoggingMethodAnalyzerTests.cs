@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#if !NET48
+using System.Globalization;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -355,3 +356,4 @@ public class TestClass
         }
     }
 }
+#endif

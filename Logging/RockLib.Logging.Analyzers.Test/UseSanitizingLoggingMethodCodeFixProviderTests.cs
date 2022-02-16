@@ -160,6 +160,7 @@ public class Foo
 }").ConfigureAwait(false);
         }
 
+#if !NET48
         [Fact(DisplayName = "'Replace with call to SetSanitizedExtendedProperty' is applied to TryAdd method")]
         public async Task CodeFixApplied6()
         {
@@ -189,5 +190,6 @@ public class Foo
     }
 }").ConfigureAwait(false);
         }
+#endif
     }
 }
