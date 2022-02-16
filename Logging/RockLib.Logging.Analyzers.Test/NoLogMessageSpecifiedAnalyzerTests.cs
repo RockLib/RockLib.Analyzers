@@ -8,8 +8,8 @@ namespace RockLib.Logging.Analyzers.Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsProvided()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -24,8 +24,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsProvidedToSpecificLogLevelMethods()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -51,8 +51,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsProvidedViaProperty()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -70,8 +70,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsNotProvided()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -90,8 +90,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsNotProvidedInEntry()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -107,8 +107,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsProvidedAsEmpty()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -127,8 +127,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsNotSet()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -151,8 +151,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLogMessageIsEmpty()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogMessageSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 

@@ -8,8 +8,8 @@ namespace RockLib.Logging.Analyzers.Test
         [Fact]
         public static async Task AnalyzeWhenLevelIsNotSet()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogLevelSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogLevelSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test
@@ -32,8 +32,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenLevelIsSet()
         {
-            await TestAssistants.VerifyAnalyzerAsync<NoLogLevelSpecifiedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<NoLogLevelSpecifiedAnalyzer>(
+@"using RockLib.Logging;
 using System;
 
 public class Test

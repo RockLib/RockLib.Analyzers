@@ -8,8 +8,8 @@ namespace RockLib.Logging.Analyzers.Test
         [Fact]
         public static async Task AnalyzeWhenExceptionIsNotPassedToExtensionMethod()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -44,8 +44,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenExceptionIsNotPassedToEntry()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -76,8 +76,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenNullIsPassedToExtensionMethod()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -112,8 +112,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenNullIsPassedToEntry()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -145,8 +145,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenIncorrectExceptionIsPassedToExtensionMethod()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -182,8 +182,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenIncorrectExceptionIsPassedToEntry()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -216,8 +216,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenMultipleExceptionsAreNotPassedToExtensionMethod()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Net;
@@ -247,8 +247,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenIncorrectExceptionIsPassedToLogMethod()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Net;
@@ -297,8 +297,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToExtensionMethod()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -333,8 +333,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToEntry()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -358,8 +358,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToConstructor()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -386,8 +386,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenCaughtExceptionIsPassedCorrectlyToPropertySetter()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -412,8 +412,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenCaughtExceptionIsFilteredAndLogged()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 
@@ -448,8 +448,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenMutlipleCaughtExceptionIsFilteredAndLogged()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Net;
@@ -479,8 +479,8 @@ public class Test
         [Fact]
         public static async Task AnalyzeWhenMultipleCaughtExceptionsAreLogged()
         {
-            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(@"
-using RockLib.Logging;
+            await TestAssistants.VerifyAnalyzerAsync<CaughtExceptionShouldBeLoggedAnalyzer>(
+@"using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 using System;
 using System.Net;
