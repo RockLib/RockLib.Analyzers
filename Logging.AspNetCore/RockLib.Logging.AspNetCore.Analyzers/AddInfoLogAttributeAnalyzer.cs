@@ -42,31 +42,31 @@ namespace RockLib.Logging.AspNetCore.Analyzers
         private static void OnCompilationStart(CompilationStartAnalysisContext context)
         {
             var infoLogAttributeType = context.Compilation.GetTypeByMetadataName("RockLib.Logging.AspNetCore.InfoLogAttribute");
-            if (infoLogAttributeType == null) 
+            if (infoLogAttributeType is null) 
             { 
                 return; 
             }
 
             var nonControllerAttributeType = context.Compilation.GetTypeByMetadataName("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
-            if (nonControllerAttributeType == null)
+            if (nonControllerAttributeType is null)
             {
                 return;
             }
 
             var controllerAttributeType = context.Compilation.GetTypeByMetadataName("Microsoft.AspNetCore.Mvc.ControllerAttribute");
-            if (controllerAttributeType == null)
+            if (controllerAttributeType is null)
             {
                 return;
             }
 
             var nonActionAttributeType = context.Compilation.GetTypeByMetadataName("Microsoft.AspNetCore.Mvc.NonActionAttribute");
-            if (nonActionAttributeType == null)
+            if (nonActionAttributeType is null)
             {
                 return;
             }
 
             var filterCollectionType = context.Compilation.GetTypeByMetadataName("Microsoft.AspNetCore.Mvc.Filters.FilterCollection");
-            if (filterCollectionType == null)
+            if (filterCollectionType is null)
             {
                 return;
             }
@@ -157,25 +157,14 @@ namespace RockLib.Logging.AspNetCore.Analyzers
             // https://github.com/dotnet/aspnetcore/blob/62b77d0bad02e72b6675545392ecb3232d508e43/src/Mvc/Mvc.Core/src/Controllers/ControllerFeatureProvider.cs#L41
             private bool IsController(INamedTypeSymbol namedTypeSymbol)
             {
-                // TODO: Can probably simplify this.
-                if (namedTypeSymbol.IsValueType)
+                if (namedTypeSymbol.IsValueType ||  namedTypeSymbol.IsAbstract ||
+                    namedTypeSymbol.DeclaredAccessibility != Accessibility.Public ||
+                    namedTypeSymbol.IsGenericType || IsAttributeDefined(namedTypeSymbol, _nonControllerAttributeType) ||
+                    (!namedTypeSymbol.Name.EndsWith("Controller", StringComparison.InvariantCulture) && 
+                        !IsAttributeDefined(namedTypeSymbol, _controllerAttributeType)))
+                {
                     return false;
-
-                if (namedTypeSymbol.IsAbstract)
-                    return false;
-
-                if (namedTypeSymbol.DeclaredAccessibility != Accessibility.Public)
-                    return false;
-
-                if (namedTypeSymbol.IsGenericType)
-                    return false;
-
-                if (IsAttributeDefined(namedTypeSymbol, _nonControllerAttributeType))
-                    return false;
-
-                if (!namedTypeSymbol.Name.EndsWith("Controller", StringComparison.InvariantCulture)
-                    && !IsAttributeDefined(namedTypeSymbol, _controllerAttributeType))
-                    return false;
+                }
 
                 return true;
             }
@@ -183,30 +172,15 @@ namespace RockLib.Logging.AspNetCore.Analyzers
             // https://github.com/dotnet/aspnetcore/blob/62b77d0bad02e72b6675545392ecb3232d508e43/src/Mvc/Mvc.Core/src/ApplicationModels/DefaultApplicationModelProvider.cs#L396
             private bool IsAction(IMethodSymbol methodSymbol)
             {
-                // TODO: Can probably simplify this.
-                if (methodSymbol.IsStatic)
+                if (methodSymbol.IsStatic || methodSymbol.IsAbstract ||
+                    methodSymbol.MethodKind == MethodKind.Constructor ||
+                    methodSymbol.IsGenericMethod ||
+                    methodSymbol.DeclaredAccessibility != Accessibility.Public ||
+                    IsAttributeDefined(methodSymbol, _nonActionAttributeType) ||
+                    methodSymbol.OverriddenMethod?.ContainingType.SpecialType == SpecialType.System_Object)
+                {
                     return false;
-
-                if (methodSymbol.IsAbstract)
-                    return false;
-
-                if (methodSymbol.MethodKind == MethodKind.Constructor)
-                    return false;
-
-                if (methodSymbol.IsGenericMethod)
-                    return false;
-
-                if (methodSymbol.DeclaredAccessibility != Accessibility.Public)
-                    return false;
-
-                if (IsAttributeDefined(methodSymbol, _nonActionAttributeType))
-                    return false;
-
-                // Overridden methods from Object class, e.g. Equals(Object), GetHashCode(), etc., are not valid.
-                if (methodSymbol.OverriddenMethod?.ContainingType.SpecialType == SpecialType.System_Object)
-                    return false;
-
-                // Dispose method implemented from IDisposable is not valid
+                }
 
                 return true;
             }
