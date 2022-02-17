@@ -31,7 +31,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\RockLib.Logging.AspNetCore.Analyzers.CodeFixes\RockLib.Logging.AspNetCore.Analyzers.CodeFixes.csproj" />
     <ProjectReference Include="..\RockLib.Logging.AspNetCore.Analyzers\RockLib.Logging.AspNetCore.Analyzers.csproj" />
   </ItemGroup>
 
