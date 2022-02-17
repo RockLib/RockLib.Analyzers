@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<Description>Roslyn analyzers for RockLib.Logging.AspNetCore</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<IsPackable>false</IsPackable>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<NoPackageAnalysis>true</NoPackageAnalysis>
 		<PackageIcon>icon.png</PackageIcon>
