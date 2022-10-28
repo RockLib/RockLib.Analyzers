@@ -1,37 +1,37 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers", "..\Logging\RockLib.Logging.Analyzers\RockLib.Logging.Analyzers.csproj", "{D23CEA97-7EEC-4D16-B6D9-D2628CDFF812}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers", "Logging\RockLib.Logging.Analyzers\RockLib.Logging.Analyzers.csproj", "{D23CEA97-7EEC-4D16-B6D9-D2628CDFF812}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.Scenarios", "..\Logging\RockLib.Logging.Analyzers.Scenarios\RockLib.Logging.Analyzers.Scenarios.csproj", "{E76742E4-B51A-42E8-AA38-CA2682EFF11F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.Scenarios", "Logging\RockLib.Logging.Analyzers.Scenarios\RockLib.Logging.Analyzers.Scenarios.csproj", "{E76742E4-B51A-42E8-AA38-CA2682EFF11F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.Test", "..\Logging\RockLib.Logging.Analyzers.Test\RockLib.Logging.Analyzers.Test.csproj", "{3546E8BF-49FB-40A8-BF57-174D1D9F1EBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Analyzers.Test", "Logging\RockLib.Logging.Analyzers.Test\RockLib.Logging.Analyzers.Test.csproj", "{3546E8BF-49FB-40A8-BF57-174D1D9F1EBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.AspNetCore.Analyzers", "..\Logging.AspNetCore\RockLib.Logging.AspNetCore.Analyzers\RockLib.Logging.AspNetCore.Analyzers.csproj", "{A3FE5208-ED06-4B5F-A01F-3155C2899940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.AspNetCore.Analyzers", "Logging.AspNetCore\RockLib.Logging.AspNetCore.Analyzers\RockLib.Logging.AspNetCore.Analyzers.csproj", "{A3FE5208-ED06-4B5F-A01F-3155C2899940}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.AspNetCore.Analyzers.Scenarios", "..\Logging.AspNetCore\RockLib.Logging.AspNetCore.Analyzers.Scenarios\RockLib.Logging.AspNetCore.Analyzers.Scenarios.csproj", "{B509F355-2D1E-4559-8877-6F7C56FD9764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.AspNetCore.Analyzers.Scenarios", "Logging.AspNetCore\RockLib.Logging.AspNetCore.Analyzers.Scenarios\RockLib.Logging.AspNetCore.Analyzers.Scenarios.csproj", "{B509F355-2D1E-4559-8877-6F7C56FD9764}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.AspNetCore.Analyzers.Test", "..\Logging.AspNetCore\RockLib.Logging.AspNetCore.Analyzers.Test\RockLib.Logging.AspNetCore.Analyzers.Test.csproj", "{15AC3BCF-24FB-443A-9180-3E56178B3D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.AspNetCore.Analyzers.Test", "Logging.AspNetCore\RockLib.Logging.AspNetCore.Analyzers.Test\RockLib.Logging.AspNetCore.Analyzers.Test.csproj", "{15AC3BCF-24FB-443A-9180-3E56178B3D9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Microsoft.Extensions.Analyzers", "..\Logging.Microsoft.Extensions\RockLib.Logging.Microsoft.Extensions.Analyzers\RockLib.Logging.Microsoft.Extensions.Analyzers.csproj", "{77DA7A38-C2ED-40C5-BE22-55A406CDBAB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Microsoft.Extensions.Analyzers", "Logging.Microsoft.Extensions\RockLib.Logging.Microsoft.Extensions.Analyzers\RockLib.Logging.Microsoft.Extensions.Analyzers.csproj", "{77DA7A38-C2ED-40C5-BE22-55A406CDBAB2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Microsoft.Extensions.Analyzers.Test", "..\Logging.Microsoft.Extensions\RockLib.Logging.Microsoft.Extensions.Analyzers.Test\RockLib.Logging.Microsoft.Extensions.Analyzers.Test.csproj", "{6234232A-9622-444B-9177-D14F8F4046FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Microsoft.Extensions.Analyzers.Test", "Logging.Microsoft.Extensions\RockLib.Logging.Microsoft.Extensions.Analyzers.Test\RockLib.Logging.Microsoft.Extensions.Analyzers.Test.csproj", "{6234232A-9622-444B-9177-D14F8F4046FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Microsoft.Extensions.Analyzers.Vsix", "..\Logging.Microsoft.Extensions\RockLib.Logging.Microsoft.Extensions.Analyzers.Vsix\RockLib.Logging.Microsoft.Extensions.Analyzers.Vsix.csproj", "{CF8BA93B-9767-45CB-8FA0-8ED7DD6CB98B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockLib.Logging.Microsoft.Extensions.Analyzers.Vsix", "Logging.Microsoft.Extensions\RockLib.Logging.Microsoft.Extensions.Analyzers.Vsix\RockLib.Logging.Microsoft.Extensions.Analyzers.Vsix.csproj", "{CF8BA93B-9767-45CB-8FA0-8ED7DD6CB98B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RockLib.Analyzers.Common", "..\Common\RockLib.Analyzers.Common.shproj", "{886A10E9-6C82-4E91-9DA0-14DC9531234F}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RockLib.Analyzers.Common", "Common\RockLib.Analyzers.Common.shproj", "{886A10E9-6C82-4E91-9DA0-14DC9531234F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE7E671A-AE5A-4E5D-91F3-A77FEBB45EF3}"
 	ProjectSection(SolutionItems) = preProject
-		..\.editorconfig = ..\.editorconfig
-		..\.gitignore = ..\.gitignore
-		..\CODE_OF_CONDUCT.md = ..\CODE_OF_CONDUCT.md
-		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
-		..\icon.png = ..\icon.png
-		..\LICENSE.md = ..\LICENSE.md
-		..\README.md = ..\README.md
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		icon.png = icon.png
+		LICENSE.md = LICENSE.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
@@ -84,9 +84,9 @@ Global
 		SolutionGuid = {2FA523E5-F294-4F10-992C-9794E157E9E2}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\Common\RockLib.Analyzers.Common.projitems*{77da7a38-c2ed-40c5-be22-55a406cdbab2}*SharedItemsImports = 5
-		..\Common\RockLib.Analyzers.Common.projitems*{886a10e9-6c82-4e91-9da0-14dc9531234f}*SharedItemsImports = 13
-		..\Common\RockLib.Analyzers.Common.projitems*{a3fe5208-ed06-4b5f-a01f-3155c2899940}*SharedItemsImports = 5
-		..\Common\RockLib.Analyzers.Common.projitems*{d23cea97-7eec-4d16-b6d9-d2628cdff812}*SharedItemsImports = 5
+		Common\RockLib.Analyzers.Common.projitems*{77da7a38-c2ed-40c5-be22-55a406cdbab2}*SharedItemsImports = 5
+		Common\RockLib.Analyzers.Common.projitems*{886a10e9-6c82-4e91-9da0-14dc9531234f}*SharedItemsImports = 13
+		Common\RockLib.Analyzers.Common.projitems*{a3fe5208-ed06-4b5f-a01f-3155c2899940}*SharedItemsImports = 5
+		Common\RockLib.Analyzers.Common.projitems*{d23cea97-7eec-4d16-b6d9-d2628cdff812}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
