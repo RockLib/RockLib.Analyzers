@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Extended property'
+sidebar_label: 'Extended property is not marked as safe to log'
 ---
 
 # RockLib0000: Extended property is not marked as safe to log
