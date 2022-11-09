@@ -1,3 +1,7 @@
+---
+sidebar_label: 'Caught exception should be logged'
+---
+
 # RockLib0006: Caught exception should be logged
 
 ## Cause
@@ -20,7 +24,7 @@ To fix a violation of this rule, apply the appropriate code fix:
 
 ### Violates
 
-```c#
+```csharp
 try
 {
     DoSomething();
@@ -33,7 +37,7 @@ catch
 
 ### Does not violate
 
-```c#
+```csharp
 try
 {
     DoSomething();
@@ -46,7 +50,7 @@ catch (Exception ex)
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0006 // Caught exception should be logged
 #pragma warning restore RockLib0006 // Caught exception should be logged
 ```

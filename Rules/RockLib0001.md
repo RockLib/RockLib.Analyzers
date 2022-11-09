@@ -1,3 +1,7 @@
+---
+sidebar_label: 'Use sanitizing logging method'
+---
+
 # RockLib0001: Use sanitizing logging method
 
 ## Cause
@@ -26,7 +30,7 @@ Note that each of the examples uses a `Client` object as the value for an extend
 
 Setting `LogEntry.ExtendedProperties` values directly:
 
-```c#
+```csharp
 using RockLib.Logging;
 
 public class Test
@@ -44,7 +48,7 @@ public class Test
 
 Calling a non-sanitizing logging extension methods (in this case, `Info`):
 
-```c#
+```csharp
 using RockLib.Logging;
 
 public class Test
@@ -62,7 +66,7 @@ public class Test
 
 Passing an `extendedProperties` parameter to the `LogEntry` constructor:
 
-```c#
+```csharp
 using RockLib.Logging;
 
 public class Test
@@ -79,7 +83,7 @@ public class Test
 
 Calling the `LogEntry.SetExtendedProperties` method:
 
-```c#
+```csharp
 using RockLib.Logging;
 
 public class Test
@@ -95,7 +99,7 @@ public class Test
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0001 // Use sanitizing logging method
 #pragma warning restore RockLib0001 // Use sanitizing logging method
 ```

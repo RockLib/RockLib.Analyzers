@@ -1,3 +1,7 @@
+---
+sidebar_label: 'No log level specified'
+---
+
 # RockLib0005: No log level specified
 
 ## Cause
@@ -23,7 +27,7 @@ To fix a violation of this rule, apply the appropriate code fix:
 
 ### Violates
 
-```c#
+```csharp
 public void Example(ILogger logger)
 {
     var logEntry = new LogEntry("Example log with no level");
@@ -33,7 +37,7 @@ public void Example(ILogger logger)
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0005 // No log level specified
 #pragma warning restore RockLib0005 // No log level specified
 ```

@@ -1,3 +1,7 @@
+---
+sidebar_label: 'Extended property'
+---
+
 # RockLib0000: Extended property is not marked as safe to log
 
 ## Cause
@@ -16,7 +20,7 @@ To fix a violation of this rule, decorate one or more properties of the offendin
 
 Consider the following `Examples` class. Each of its methods call one of the sanitizing logging methods and has the potential to trigger a rule violation. Whether it does or not depends on the definition of the `Client` class.
 
-```c#
+```csharp
 using RockLib.Logging;
 using RockLib.Logging.SafeLogging;
 
@@ -43,7 +47,7 @@ public static class Examples
 
 When the `Client` class is defined as follows, the examples above will trigger a violation:
 
-```c#
+```csharp
 public class Client
 {
     public string Name { get; set; }
@@ -56,7 +60,7 @@ public class Client
 
 When the `Client` class is defined as follows, the examples above will *not* trigger a violation:
 
-```c#
+```csharp
 public class Client
 {
     [SafeToLog]
@@ -68,7 +72,7 @@ public class Client
 
 Alternatively, the class itself can be decorated with the [SafeToLog] attribute, and any properties that are *not* safe are decorated with the [NotSafeToLog] attribute:
 
-```c#
+```csharp
 [SafeToLog]
 public class Client
 {
@@ -81,20 +85,20 @@ public class Client
 
 If you do not own the type that needs to be marked as safe to log, you can add `SafeToLogAttribute` to properties at runtime.
 
-```c#
+```csharp
 SafeToLogAttribute.Decorate<Client>(client => client.Name);
 ```
 
 Alternatively, decorate the class with `SafeToLogAttribute` and exclude the unsafe properties by decorating them with `NotSafeToLogAttribute`:
 
-```c#
+```csharp
 SafeToLogAttribute.Decorate<Client>();
 NotSafeToLogAttribute.Decorate<Client>(client => client.SSN);
 ```
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0000 // Extended property is not marked as safe to log
 #pragma warning restore RockLib0000 // Extended property is not marked as safe to log
 ```

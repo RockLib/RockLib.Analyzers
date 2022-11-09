@@ -1,3 +1,7 @@
+---
+sidebar_label: 'Logger should be synchronous'
+---
+
 # RockLib0002: Logger should be synchronous
 
 ## Cause
@@ -21,7 +25,7 @@ To fix a violation of this rule, apply the appropriate code fix:
 
 `IServiceCollection` extension method:
 
-```c#
+```csharp
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;
@@ -42,7 +46,7 @@ public class Startup
 
 `ILoggingBuilder` extension method:
 
-```c#
+```csharp
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -82,7 +86,7 @@ public class Startup
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0002 // Logger should be synchronous
 #pragma warning restore RockLib0002 // Logger should be synchronous
 ```
