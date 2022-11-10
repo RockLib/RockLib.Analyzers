@@ -1,3 +1,7 @@
+---
+sidebar_label: 'RockLibLoggerProvider has missing logger'
+---
+
 # RockLib0003: RockLibLoggerProvider has missing logger
 
 ## Cause
@@ -18,7 +22,7 @@ Add a logger to the service collection that has a matching name.
 
 Default logger name:
 
-```c#
+```csharp
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;
@@ -36,7 +40,7 @@ public class Startup
 
 Logger name specified:
 
-```c#
+```csharp
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;
@@ -54,7 +58,7 @@ public class Startup
 
 Default logger name:
 
-```c#
+```csharp
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;
@@ -73,7 +77,7 @@ public class Startup
 
 Logger name specified:
 
-```c#
+```csharp
 using Microsoft.Extensions.DependencyInjection;
 using RockLib.Logging;
 using RockLib.Logging.DependencyInjection;
@@ -90,7 +94,7 @@ public class Startup
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0003 // RockLibLoggerProvider has missing logger
 #pragma warning restore RockLib0003 // RockLibLoggerProvider has missing logger
 ```

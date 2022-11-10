@@ -1,3 +1,7 @@
+---
+sidebar_label: 'No log message specified'
+---
+
 # RockLib0008: No log message specified
 
 ## Cause
@@ -16,7 +20,7 @@ To fix a violation of this rule, provide a message to the logging method or log 
 
 ### Violates
 
-```c#
+```csharp
 public void Example1(ILogger logger)
 {
     var logEntry = new LogEntry("", LogLevel.Info);
@@ -44,7 +48,7 @@ public void Example4(ILogger logger)
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0008 // No log message specified
 #pragma warning restore RockLib0008 // No log message specified
 ```

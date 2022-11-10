@@ -1,3 +1,7 @@
+---
+sidebar_label: 'Add InfoLog attribute'
+---
+
 # RockLib0004: Add InfoLog attribute
 
 ## Cause
@@ -16,7 +20,7 @@ To fix the viloation, use the provided "Add InfoLog attribute" for either the co
 
 ### Violates
 
-```c#
+```csharp
 using Microsoft.AspNetCore.Mvc;
 
 namespace TestingNamespace
@@ -55,7 +59,7 @@ namespace TestingNamespace
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0004 // Add InfoLog attribute
 #pragma warning restore RockLib0004 // Add InfoLog attribute
 ```

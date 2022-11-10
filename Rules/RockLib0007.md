@@ -1,3 +1,7 @@
+---
+sidebar_label: 'Unexpected extended properties object'
+---
+
 # RockLib0007: Unexpected extended properties object
 
 ## Cause
@@ -16,7 +20,7 @@ To fix a violation of this rule, instead passing the unexpected object directly 
 
 ### Violates
 
-```c#
+```csharp
 public void Example(Foo foo)
 {
     _logger.Info("Some message", foo);
@@ -25,7 +29,7 @@ public void Example(Foo foo)
 
 ### Does Not Violate
 
-```c#
+```csharp
 public void Example(Foo foo)
 {
     _logger.Info("Some message", new { foo });
@@ -34,7 +38,7 @@ public void Example(Foo foo)
 
 The `extendedProperties` argument can also be a string dictionary:
 
-```c#
+```csharp
 public void Example(Foo foo)
 {
     Dictionary<string, object> extendedProperties = new() { ["foo"] = foo };
@@ -44,7 +48,7 @@ public void Example(Foo foo)
 
 ## How to suppress violations
 
-```c#
+```csharp
 #pragma warning disable RockLib0007 // Unexpected extended properties object
 #pragma warning restore RockLib0007 // Unexpected extended properties object
 ```
