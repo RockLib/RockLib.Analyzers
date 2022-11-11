@@ -6,6 +6,7 @@
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
 	  <PackageReference Include="RockLib.Logging.AspNetCore" Version="4.0.0" />
+	  <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\RockLib.Logging.AspNetCore.Analyzers\RockLib.Logging.AspNetCore.Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" SetTargetFramework="TargetFramewor=netstandard2.0" />
