@@ -2,7 +2,13 @@
 sidebar_label: 'Caught exception should be logged'
 ---
 
-# RockLib0006: Caught exception should be logged
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0006: Caught exception should be logged
 
 ## Cause
 

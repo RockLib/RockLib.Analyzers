@@ -2,7 +2,13 @@
 sidebar_label: 'Logger should be synchronous'
 ---
 
-# RockLib0002: Logger should be synchronous
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0002: Logger should be synchronous
 
 ## Cause
 
