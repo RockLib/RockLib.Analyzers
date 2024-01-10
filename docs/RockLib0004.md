@@ -2,7 +2,13 @@
 sidebar_label: 'Add InfoLog attribute'
 ---
 
-# RockLib0004: Add InfoLog attribute
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0004: Add InfoLog attribute
 
 ## Cause
 

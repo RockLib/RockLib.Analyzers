@@ -2,7 +2,13 @@
 sidebar_label: 'No log message specified'
 ---
 
-# RockLib0008: No log message specified
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0008: No log message specified
 
 ## Cause
 

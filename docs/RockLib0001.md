@@ -2,7 +2,13 @@
 sidebar_label: 'Use sanitizing logging method'
 ---
 
-# RockLib0001: Use sanitizing logging method
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0001: Use sanitizing logging method
 
 ## Cause
 

@@ -2,7 +2,13 @@
 sidebar_label: 'Unexpected extended properties object'
 ---
 
-# RockLib0007: Unexpected extended properties object
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0007: Unexpected extended properties object
 
 ## Cause
 

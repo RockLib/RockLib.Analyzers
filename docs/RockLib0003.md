@@ -2,7 +2,13 @@
 sidebar_label: 'RockLibLoggerProvider has missing logger'
 ---
 
-# RockLib0003: RockLibLoggerProvider has missing logger
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0003: RockLibLoggerProvider has missing logger
 
 ## Cause
 

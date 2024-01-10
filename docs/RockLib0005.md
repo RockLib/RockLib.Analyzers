@@ -2,7 +2,13 @@
 sidebar_label: 'No log level specified'
 ---
 
-# RockLib0005: No log level specified
+# :warning: Deprecation Warning :warning:
+
+This library has been deprecated and will no longer receive updates.
+
+---
+
+## RockLib0005: No log level specified
 
 ## Cause
 
