@@ -45,7 +45,7 @@ namespace TestingNamespace
 ```
 
 ### Does not violate
-
+```csharp
 using Microsoft.AspNetCore.Mvc;
 
 namespace TestingNamespace
@@ -62,6 +62,7 @@ namespace TestingNamespace
         }
     }
 }
+```
 
 ## How to suppress violations
 
