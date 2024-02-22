@@ -16,7 +16,7 @@ This rule fires when a sanitizing logging method is called and the value of an e
 
 ## Reason for rule
 
-If the value of a sanitized extended property does not have any properties marked as safe to log, then no properties are recorded. Instead, the extended property value is a warning message, "All properties from the {{type}} type have been excluded from the log entry extended properties because none were decorated with the [SafeToLog] attribute".
+If the value of a sanitized extended property does not have any properties marked as safe to log, then no properties are recorded. Instead, the extended property value is a warning message, "All properties from the `{{type}}` type have been excluded from the log entry extended properties because none were decorated with the [SafeToLog] attribute".
 
 ## How to fix violations
 
